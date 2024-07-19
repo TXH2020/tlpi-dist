@@ -13,6 +13,7 @@
 /* t_stime.c
 
    Demonstrate the use of stime() to set the system time.
+   (Note that stime() has been deprecated. Use clock_settime() instead.)
 
    Requires superuser privileges.
 */
@@ -29,6 +30,7 @@ int
 main(int argc, char *argv[])
 {
     struct tm tm;
+    struct timespec stime;
     time_t t;
 
     if (argc != 2 || strcmp(argv[1], "--help") == 0)
@@ -38,7 +40,11 @@ main(int argc, char *argv[])
         fatal("strptime failed");
 
     t = mktime(&tm);
-    if (stime(&t) == -1)
+    // stime is deprecated.
+    /*if (stime(&t) == -1)
+        errExit("stime");*/
+    stime.tv_sec = t;
+    if ( clock_settime( CLOCK_REALTIME, &stime) == -1)
         errExit("stime");
 
     exit(EXIT_SUCCESS);

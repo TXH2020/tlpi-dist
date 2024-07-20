@@ -80,7 +80,7 @@ setenv(const char *name, const char *value, int overwrite)
     return (putenv(es) != 0) ? -1 : 0;
 }
 
-#ifdef TEST_IT
+
 
 int
 main()
@@ -108,5 +108,3 @@ main()
 
     exit(EXIT_SUCCESS);
 }
-
-#endif

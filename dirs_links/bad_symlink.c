@@ -35,6 +35,7 @@ main(int argc, char *argv[])
         errExit("open");
     if (close(fd) == -1)
         errExit("close");
+    // symlink("test/myfile",...  this works.
     if (symlink("myfile", "../mylink") == -1)
         errExit("symlink");
     if (chmod("../mylink", S_IRUSR) == -1)
